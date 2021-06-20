@@ -11,9 +11,19 @@ Tyrion - "Depends on the sellsword"
 
 
 char(king).
+char(priest).
+char(rich).
 
 
 choice(god,priest). 
+choice(authority,king).
+choice(money,rich).
+
+/*is_killed(C,X,Y) :- char(X), char(Y), X \= Y, choice(C,Z), X\=Z, Y\=Z.
+sau: */
+is_killed(C,X,Y) :- char(X), char(Y), X \= Y, \+ choice(C,X), \+ choice(C,Y).
+
+
 
 
 
