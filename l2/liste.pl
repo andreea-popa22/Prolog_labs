@@ -1,7 +1,29 @@
 %Lists
 
+is_list([]).
+is_list([_|_]).
+
+head([X|_],X).
+
+last1([X],X).
+last1([_|T],Y):- last1(T,Y).
+
+tail([],[]).
+tail([_|T],T).
+
+append1([],L,L).
+append1([X|T],L, [X|R]) :- append1(T,L,R).
+
 member_of(X,[X|_]).
 member_of(X,[_|Tail]) :- member_of(X,Tail).
+
+% daca o lista se obitne din alta prin eliminarea unui element.
+elim1(X, [X|T], T).
+elim1(X, [H|T], [H|L]) :- elim1(X,T,L).
+
+% verif daca doua liste sunt permutari
+perm([],[]). 
+perm([X|T],L) :- elim(X,L,R), perm(R,T).
 
 concat_lists([], List, List).
 concat_lists([Elem | List1], List2, [Elem | List3]) :-
@@ -56,8 +78,17 @@ pal1([X,L]) :- splitfl(L,T,X), pal1(T).
 
 
 remove_duplicates([], []).
-remove_duplicates([H], [H]).
+%remove_duplicates([H|T], L) :- .
 remove_duplicates([H|Tail], R) :- remove_duplicates(Tail, R1), R is [H|R1], (member_of(H, R1), R is R1).
+
+rd1([],[]).
+rd1([],R) :- length(R,NR), NR < 1, R is [].  
+rd1([H|T], R) :- (member_of(H, R)) -> rd1(T, R) ; append([H],R,L), rd1(T, L).
+
 /*
 ceva nu merge
+
+remdup([], []).
+remdup([H | T], L) :- member(H, T), remove_duplicates(T, L).
+remdup([H | T], [H | U]) :- \+ member(H, T), remove_duplicates(T, U).
 */
