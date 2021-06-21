@@ -16,3 +16,10 @@ line(N, C) :- N1 is N - 1, write(C), line(N1, C).
 /*line(N, C) :- N1 is N - 1, write(C), line(N1, C), nl. (randurile libere se pun la sf, dupa apelul recursiv)
 */
 
+square3(0, _, _).
+square3(X, N, C) :- X1 is X - 1, line(N,C), nl, square3(X1, N, C).
+
+square4(0, _).
+square4(N, C) :- N1 is N - 1, line(N,C), nl, square(N1,C).
+
+square(N, C) :- square3(N, N, C).
