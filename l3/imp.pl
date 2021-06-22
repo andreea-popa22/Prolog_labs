@@ -19,7 +19,6 @@ aexp(AE1 / AE2) :- aexp(AE1), aexp(AE2).
 
 
 bexp(AE1 =< AE2) :- aexp(AE1), aexp(AE2).
-bexp(AE1 => AE2) :- aexp(AE1), aexp(AE2).
 
 program(St,AE) :-
   stmt(St),
